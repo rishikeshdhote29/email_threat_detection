@@ -1,0 +1,16 @@
+email_text,subject,sender,is_phishing
+"Click here to claim your prize! You've won $1000!","Congratulations Winner!","winner@suspicious-site.com",1
+"Meeting reminder for tomorrow at 2 PM in conference room A","Team Meeting Tomorrow","sarah.johnson@company.com",0
+"Your account has been compromised. Click link to secure it immediately.","Urgent: Account Security Alert","security@fake-bank.net",1
+"Please review the attached quarterly report and provide feedback","Q3 Report Review","finance@company.com",0
+"Limited time offer! Get 90% off all products. Act now!","Special Discount - 90% OFF","deals@spam-store.com",1
+"Thanks for your presentation today. The client was very impressed.","Great job today","manager@company.com",0
+"URGENT! Your credit card will be suspended unless you verify immediately!","Card Suspension Notice","alerts@fakebank.org",1
+"Don't forget about the team lunch tomorrow at 12:30 PM","Team Lunch Reminder","hr@company.com",0
+"Congratulations! You've been selected for a FREE vacation package!","FREE Vacation - Act Now!","travel@scamsite.com",1
+"The server maintenance is scheduled for this weekend","Server Maintenance Notice","it-admin@company.com",0
+"Your package delivery failed. Click to reschedule now!","Delivery Failed","delivery@fakecourier.net",1
+"Monthly sales report is ready for review in the shared folder","Sales Report Available","analytics@company.com",0
+"ACT NOW! Limited time offer expires in 24 hours!","URGENT OFFER","promotions@spammail.com",1
+"Reminder: Performance reviews are due next Friday","Performance Review Deadline","hr@company.com",0
+"Your account balance is low. Click here to add funds immediately.","Low Balance Alert","noreply@fakebank.com",1
