@@ -6,7 +6,7 @@ import ExampleEmails from './components/ExampleEmails';
 import ApiStatus from './components/ApiStatus';
 import './App.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://10.17.231.41:10000';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://email-threat-detection.onrender.com';
 
 function App() {
   const [result, setResult] = useState(null);

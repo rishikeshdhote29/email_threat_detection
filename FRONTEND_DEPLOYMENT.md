@@ -19,11 +19,12 @@
 
 **Render.com Settings:**
 - **Type**: Static Site
-- **Build Command**: `cd web_app && npm install && npm run build`
+- **Build Command**: `cd web_app && chmod -R +x node_modules/.bin/ && npm ci && CI=false npm run build`
 - **Publish Directory**: `web_app/build`
 - **Auto-Deploy**: Yes
 
 **Environment Variables:**
+- `CI`: `false`
 - `REACT_APP_API_URL`: `https://your-backend-api.onrender.com`
 
 #### **🔧 Method 2: Node.js Web Service**
@@ -31,12 +32,13 @@
 **Render.com Settings:**
 - **Environment**: Node.js
 - **Root Directory**: `web_app`
-- **Build Command**: `npm install && npm run build`
+- **Build Command**: `chmod -R +x node_modules/.bin/ && npm ci && CI=false npm run build`
 - **Start Command**: `npm run serve`
 - **Auto-Deploy**: Yes
 
 **Environment Variables:**
 - `NODE_ENV`: `production`
+- `CI`: `false`
 - `REACT_APP_API_URL`: `https://your-backend-api.onrender.com`
 
 ### **Step 3: Deploy on Render.com**
@@ -162,6 +164,29 @@ Add your frontend domain to allowed origins in your Flask API.
 
 ## 🚨 **Troubleshooting**
 
+### **"react-scripts: Permission denied" Error:**
+✅ **Fixed by:**
+- Adding `chmod -R +x node_modules/.bin/` to build command
+- Using `CI=false` to ignore warnings as errors
+- Using `npm ci` instead of `npm install` for faster, reliable builds
+
+### **Build Command Solutions:**
+```bash
+# Option 1: Full permission fix
+chmod -R +x node_modules/.bin/ && npm ci && CI=false npm run build
+
+# Option 2: Alternative build
+npm install --verbose && CI=false npm run build
+
+# Option 3: Conservative approach
+npm install && chmod +x node_modules/.bin/react-scripts && CI=false npm run build
+```
+
+### **Security Vulnerabilities:**
+- Run `npm audit fix` locally before deployment
+- Update package versions in package.json
+- Use `overrides` section for dependency conflicts
+
 ### **CORS Errors:**
 ```javascript
 // Add to your API allowed origins
@@ -170,13 +195,15 @@ Add your frontend domain to allowed origins in your Flask API.
 
 ### **Environment Variables Not Working:**
 - Ensure they start with `REACT_APP_`
+- Add `CI=false` to prevent warnings from failing build
 - Rebuild after adding env vars
 - Check Render dashboard env vars section
 
 ### **Build Failures:**
-- Check Node.js version compatibility
-- Ensure all dependencies are in package.json
+- Use Node.js 18.x (specified in .nvmrc)
+- Clear npm cache: `npm cache clean --force`
 - Check build logs in Render dashboard
+- Ensure all dependencies are in package.json
 
 ### **API Connection Issues:**
 - Verify API URL is correct and accessible

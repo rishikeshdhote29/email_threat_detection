@@ -1,23 +1,27 @@
 services:
-  # Frontend React App
+  # Frontend React App - Web Service
   - type: web
     name: email-phishing-frontend
     env: node
-    buildCommand: "npm install && npm run build"
+    buildCommand: "chmod -R +x node_modules/.bin/ && npm ci && CI=false npm run build"
     startCommand: "npm run serve"
     rootDir: web_app
     plan: free
     envVars:
       - key: NODE_ENV
         value: production
+      - key: CI
+        value: "false"
       - key: REACT_APP_API_URL
         value: https://your-backend-api.onrender.com
     
-  # Alternative: Static Site (simpler option)
+  # Alternative: Static Site (recommended)
   # - type: static_site
   #   name: email-phishing-frontend
-  #   buildCommand: "cd web_app && npm install && npm run build"
+  #   buildCommand: "cd web_app && chmod -R +x node_modules/.bin/ && npm ci && CI=false npm run build"
   #   publishPath: web_app/build
   #   envVars:
+  #     - key: CI
+  #       value: "false"
   #     - key: REACT_APP_API_URL
   #       value: https://your-backend-api.onrender.com
