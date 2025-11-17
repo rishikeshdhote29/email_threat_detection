@@ -3,13 +3,14 @@
 
 echo "🚀 Starting React app build..."
 
-# Set proper permissions for node_modules
-chmod -R +x node_modules/.bin/
+# Install dependencies first
+npm install
 
-# Install dependencies
-npm ci --only=production=false
+# Set proper permissions for node_modules (ignore errors)
+chmod -R 755 node_modules/.bin/ || true
+find node_modules/.bin -type f -exec chmod +x {} \; 2>/dev/null || true
 
 # Build the app with CI=false to ignore warnings
-CI=false npm run build
+CI=false npx react-scripts build
 
 echo "✅ Build completed successfully!"

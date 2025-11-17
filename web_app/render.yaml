@@ -3,8 +3,8 @@ services:
   - type: web
     name: email-phishing-frontend
     env: node
-    buildCommand: "chmod -R +x node_modules/.bin/ && npm ci && CI=false npm run build"
-    startCommand: "npm run serve"
+    buildCommand: "npm install && chmod -R 755 node_modules/.bin/ && CI=false npx react-scripts build"
+    startCommand: "npx serve -s build -p $PORT"
     rootDir: web_app
     plan: free
     envVars:
@@ -13,15 +13,15 @@ services:
       - key: CI
         value: "false"
       - key: REACT_APP_API_URL
-        value: https://your-backend-api.onrender.com
+        value: https://email-threat-detection.onrender.com
     
-  # Alternative: Static Site (recommended)
+  # Alternative: Static Site (recommended for better performance)
   # - type: static_site
   #   name: email-phishing-frontend
-  #   buildCommand: "cd web_app && chmod -R +x node_modules/.bin/ && npm ci && CI=false npm run build"
+  #   buildCommand: "cd web_app && npm install && chmod -R 755 node_modules/.bin/ && CI=false npx react-scripts build"
   #   publishPath: web_app/build
   #   envVars:
   #     - key: CI
   #       value: "false"
-  #     - key: REACT_APP_API_URL
-  #       value: https://your-backend-api.onrender.com
+  #     - key: REACT_APP_API_URL  
+  #       value: https://email-threat-detection.onrender.com
