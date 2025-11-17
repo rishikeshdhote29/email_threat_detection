@@ -304,30 +304,5 @@ def internal_error(error):
     }), 500
 
 if __name__ == '__main__':
-    print("🚀 Starting Email Phishing Detection API...")
-    print("📡 Loading model...")
-    
-    # Load the model on startup
-    if load_phishing_model():
-        print("✅ Model loaded successfully!")
-        print("🌐 API is ready!")
-        print("\n" + "="*50)
-        print("API ENDPOINTS:")
-        print("="*50)
-        print("GET  /           - API status and info")
-        print("GET  /health     - Health check")
-        print("POST /predict    - Single email prediction")
-        print("POST /predict/batch - Batch email prediction")
-        print("="*50)
-        print("\n📖 Example usage:")
-        print("curl -X POST http://localhost:5000/predict \\")
-        print("  -H 'Content-Type: application/json' \\")
-        print("  -d '{\"email_text\": \"Click here to win $1000!\", \"subject\": \"Winner!\", \"sender\": \"spam@example.com\"}'")
-        print("\n🚀 Starting server on http://localhost:5000")
-        
-        # Run the Flask app
-        app.run(debug=True, host='0.0.0.0', port=5000)
-    else:
-        print("❌ Failed to load model. Please train the model first:")
-        print("   python train.py")
-        sys.exit(1)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
