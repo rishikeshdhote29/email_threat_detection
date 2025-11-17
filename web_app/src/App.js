@@ -209,7 +209,7 @@ function App() {
             <div className="col-md-6">
               <p className="mb-0">
                 <i className="fas fa-robot me-2"></i>
-                Powered by Machine Learning
+                Design and developed by Rishikesh and Rajit❤️
               </p>
             </div>
           </div>
