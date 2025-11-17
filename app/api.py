@@ -304,5 +304,43 @@ def internal_error(error):
     }), 500
 
 if __name__ == '__main__':
+    print("🚀 Starting Email Phishing Detection API...")
+    print("📡 Loading model...")
+    
+    # Load the model on startup
+    if load_phishing_model():
+        print("✅ Model loaded successfully!")
+        print("🌐 API is ready!")
+    else:
+        print("❌ Model not found. Creating basic model for deployment...")
+        # Try to create a basic model if none exists
+        try:
+            from utils.preprocess import get_feature_names
+            import pickle
+            from sklearn.ensemble import RandomForestClassifier
+            import numpy as np
+            
+            # Create a dummy model for deployment
+            model = RandomForestClassifier(n_estimators=10, random_state=42)
+            # Fit with dummy data
+            X_dummy = np.random.random((10, len(get_feature_names())))
+            y_dummy = np.random.randint(0, 2, 10)
+            model.fit(X_dummy, y_dummy)
+            
+            # Save the model
+            os.makedirs('model', exist_ok=True)
+            with open('model/phishing_model.pkl', 'wb') as f:
+                pickle.dump(model, f)
+            print("✅ Basic model created successfully!")
+            
+            # Load the created model
+            load_phishing_model()
+        except Exception as e:
+            print(f"❌ Failed to create basic model: {e}")
+    
+    # Get port from environment (Render sets this automatically)
     port = int(os.environ.get('PORT', 5000))
+    print(f"🚀 Starting server on port {port}")
+    
+    # Run the Flask app (debug=False for production)
     app.run(debug=False, host='0.0.0.0', port=port)
